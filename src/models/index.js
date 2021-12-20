@@ -1,1 +1,1 @@
-export * as superAdmin from "./superAdmin";
+export { superAdmin } from "./superAdmin";
