@@ -1,17 +1,21 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany ,OneToOne ,JoinColumn } from "typeorm";
-import { center } from "./center";
+import { adminCenter } from "./adminCenter";
 
 @Entity()
-export class adminCenter {
+export class center {
 
     @PrimaryGeneratedColumn()
     id 
 
     @Column("varchar")
-    email 
+    name 
 
     @Column("varchar")
-    password
+    city 
 
+    @OneToOne(() => adminCenter, admin => admin.center)
+    @JoinColumn()
+
+    adminCenter
 
 }

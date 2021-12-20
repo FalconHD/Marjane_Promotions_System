@@ -1,12 +1,16 @@
 import 'dotenv/config';
 import { app, connection } from './config';
 import { errorHandler, notFound } from './middleware';
-import { UserRoutes } from './routes';
+import { UserRoutes,superAdmin } from './routes';
 
 export const init = () => {
 
     for (const key in UserRoutes) {
         app.use(UserRoutes[key]);
+    }
+
+    for (const key in superAdmin) {
+       app.use(superAdmin[key]);
     }
 
     // 404
