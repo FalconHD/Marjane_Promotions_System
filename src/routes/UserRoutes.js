@@ -39,4 +39,6 @@ router.get('/all', async (req, res) => {
 })
 
 
+
+
 export { router as userRoutes }

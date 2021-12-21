@@ -144,9 +144,6 @@ let automotive = [
 
 
 
-
-
-
 router.get('/add', async (req, res) => {
     const connection = getConnection()
     const allo = [...electrs, ...toys, ...fashion, ...homeGarden, ...sports, ...healthBeauty, ...automotive]

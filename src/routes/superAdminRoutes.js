@@ -41,13 +41,13 @@ router.post('/add', async (req, res) => {
     res.json(admin)
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
     const connection = getConnection()
     const { email, password } = req.body
     const admin = await connection.getRepository("super_admin").findOne({
         where: {
             email
-            
+
         }
     })
     if (admin) {
@@ -69,5 +69,11 @@ router.post('/login', async (req, res) => {
         })
     }
 })
+
+router.use((req, res, next) => {
+    next()
+})
+
+
 
 export { router as superAdmin }

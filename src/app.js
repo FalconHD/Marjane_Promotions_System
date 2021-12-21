@@ -8,10 +8,10 @@ import { json } from "express"
 export const init = () => {
 
     app.use(json());
-    app.use("/super", superAdmin);
+    // app.use("/super", superAdmin);
     // app.use("/user", userRoutes);
-    app.use("/category", Category);
-    app.use("/admin", adminCenter);
+    // app.use("/category", Category);
+    // app.use("/admin", adminCenter);
     app.use("/product", Products);
     app.use("/promotion", promotion);
 
