@@ -1,9 +1,11 @@
 import { getConnection } from "typeorm";
-import { router } from "../config";
+import { Router } from "express"
 
 
 
-export const getUsers = router.get('/users', async (req, res) => {
+const router = Router();
+
+router.get('/users', async (req, res) => {
 
     const connection = getConnection()
     console.log(connection);
@@ -17,7 +19,7 @@ export const getUsers = router.get('/users', async (req, res) => {
     })
 })
 
-export const getUserById = router.get('/user/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
 
 
     const id = req.params.id
@@ -29,3 +31,16 @@ export const getUserById = router.get('/user/:id', async (req, res) => {
 
     res.json(users)
 })
+
+router.get('/all', async (req, res) => {
+
+
+
+    res.json({
+        users: []
+
+    })
+})
+
+
+export { router as userRoutes }

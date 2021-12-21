@@ -1,2 +1,2 @@
-export * as UserRoutes from "./UserRoutes";
-export * as superAdmin from "./superAdminRoutes";
+export { superAdmin } from './superAdminRoutes';
+export { userRoutes } from './UserRoutes';

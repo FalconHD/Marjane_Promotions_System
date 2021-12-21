@@ -1,12 +1,13 @@
 import { getConnection } from "typeorm";
-import { router } from "../config";
+import { Router } from "express"
 import { superAdmin } from "../models";
 import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
 
 
+const router = Router();
 
 
-export const getSuperAdmins = router.get('/all', isSuper, async (req, res) => {
+router.get('/all', isSuper, async (req, res) => {
     const connection = getConnection()
 
     console.log(connection);
@@ -19,7 +20,7 @@ export const getSuperAdmins = router.get('/all', isSuper, async (req, res) => {
     res.json(admins)
 })
 
-export const getUserById = router.get('/:id', async (req, res) => {
+router.get('/super/:id', async (req, res) => {
     const connection = getConnection()
     const id = req.params.id
     const users = await connection.getRepository("super_admin").findOne({
@@ -30,7 +31,7 @@ export const getUserById = router.get('/:id', async (req, res) => {
     res.json(users)
 })
 
-export const addAdmin = router.post('/add', async (req, res) => {
+router.post('/super/add', async (req, res) => {
     const connection = getConnection()
     const { email, password } = req.body
     let admin = new superAdmin();
@@ -40,7 +41,7 @@ export const addAdmin = router.post('/add', async (req, res) => {
     res.json(admin)
 })
 
-export const superLogin = router.post('/login', async (req, res) => {
+router.post('/super/login', async (req, res) => {
     const connection = getConnection()
     const { email, password } = req.body
     const admin = await connection.getRepository("super_admin").findOne({
@@ -67,3 +68,6 @@ export const superLogin = router.post('/login', async (req, res) => {
         })
     }
 })
+
+
+export { router as superAdmin }
