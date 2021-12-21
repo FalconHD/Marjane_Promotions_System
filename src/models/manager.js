@@ -1,21 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany ,OneToOne ,JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { category } from "./category";
 
 @Entity()
 export class manager {
 
     @PrimaryGeneratedColumn()
-    id 
+    id
 
     @Column("varchar")
-    name 
+    name
 
     @Column("varchar")
-    email 
+    email
 
     @Column("varchar")
-    password 
-    
+    password
+
     @OneToOne(() => category, cat => cat.products, { cascade: true })
     @JoinColumn()
 
