@@ -10,6 +10,7 @@ export const connection = async () => {
         database: process.env.DB_NAME,
         synchronize: false,
         logging: false,
+        
         entities: ["src/models/*.js"],
         migrationsTableName: "custom_migration_table",
         migrations: ["src/models/migration/*.js"],

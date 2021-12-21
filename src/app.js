@@ -1,21 +1,15 @@
 import 'dotenv/config';
 import { app, connection } from './config';
 import { errorHandler, notFound } from './middleware';
-import { UserRoutes, superAdmin } from './routes';
+import { superAdmin, userRoutes } from './routes';
 import { json } from "express"
 
 
 export const init = () => {
 
     app.use(json());
-
-    for (const key in UserRoutes) {
-        app.use(UserRoutes[key]);
-    }
-
-    for (const key in superAdmin) {
-        app.use("/super", superAdmin[key]);
-    }
+    app.use("/super", superAdmin);
+    app.use("/user", userRoutes);
 
     // 404
     app.use(notFound)

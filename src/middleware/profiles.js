@@ -13,5 +13,4 @@ export const isSuper = (req, res, next) => {
     } catch (error) {
         next(error)
     }
-
 }
