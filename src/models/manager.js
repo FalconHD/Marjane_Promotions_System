@@ -1,10 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany ,OneToOne ,JoinColumn } from "typeorm";
 import { category } from "./category";
+import { center } from "./center";
 
 @Entity()
 export class manager {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id 
 
     @Column("varchar")
@@ -16,8 +17,12 @@ export class manager {
     @Column("varchar")
     password 
     
-    @OneToOne(() => category, cat => cat.products, { cascade: true })
+    @OneToOne(() => center, cent => cent.managers, { cascade: true })
     @JoinColumn()
+    center
 
+
+    @OneToOne(() => category, cat => cat.managers, { cascade: true })
+    @JoinColumn()
     category
 }

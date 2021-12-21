@@ -2,16 +2,21 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOn
 import { center } from "./center";
 
 @Entity()
-export class adminCenter {
+export class logs {
 
     @PrimaryGeneratedColumn('uuid')
     id 
 
     @Column("varchar")
-    email 
+    target 
 
     @Column("varchar")
-    password
+    message 
+
+    @Column("varchar")
+    status
+
+    
 
 
 }

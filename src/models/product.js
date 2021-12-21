@@ -4,7 +4,7 @@ import { category } from "./category";
 @Entity()
 export class product {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id 
 
     @Column("varchar")
