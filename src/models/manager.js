@@ -18,6 +18,5 @@ export class manager {
 
     @OneToOne(() => category, cat => cat.products, { cascade: true })
     @JoinColumn()
-
     category
 }
