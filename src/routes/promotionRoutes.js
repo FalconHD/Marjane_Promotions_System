@@ -2,38 +2,40 @@ import { getConnection } from "typeorm";
 import { Router } from "express"
 import { promotion } from "../models";
 import { hashPassword, checkPassword, generateToken, isSuper ,isAdCenter } from "../middleware";
+import { logs } from "../models/Logs";
 
 
 const router = Router();
 
 //products catgeory  array 
-let promotions = [
-    {
-        pourcentage: "20",
-        carteFidélité :"200",
-        adminCenter : "2" ,
-        product : "1"
-    }
-]
 
 
-
-
-router.get('/add',isAdCenter, async (req, res) => {
+router.post('/add', async (req, res) => {
     const connection = getConnection()
-    promotions.forEach(async promo => {
-        let newPromo = new promotion()
-        newPromo.pourcentage = promo.pourcentage
-        newPromo.carteFidélité = promo.carteFidélité
-        newPromo.adminCenter = promo.adminCenter
-        newPromo.product = promo.product
-        newPromo = await connection
+    const { pourcentage, carteFidélité  ,product, adminCenter } = req.body
+    
+
+    let promo = new promotion();
+    promo.pourcentage = pourcentage;
+    promo.carteFidélité = carteFidélité;
+    promo.adminCenter = adminCenter;
+    promo.product = product;
+ 
+        promo = await connection
             .getRepository("promotion")
             .save(promo)
             .catch(error => {
                 console.log(error);
             })
         console.log(promo);
+
+
+    let logMsg = new logs();
+    logMsg.message = `${adminCenter} create promotion: ${promo.id} || Product : ${product}`;
+    logMsg.target = adminCenter;
+    logMsg.status = 'created';
+    logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
+        console.log(error);
     })
 
     res.json({
