@@ -46,6 +46,7 @@ export const superLogin = router.post('/login', async (req, res) => {
     const admin = await connection.getRepository("super_admin").findOne({
         where: {
             email
+            
         }
     })
     if (admin) {
