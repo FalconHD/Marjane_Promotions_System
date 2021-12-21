@@ -129,14 +129,14 @@ let automotive = [
 
         name: "Automotive product 1",
         price: "1,000",
-        category: 8,
+        category: "6756440a-cbd6-462e-a51a-05b87357e32e",
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
 
         name: "Automotive product 2",
         price: "1,000",
-        category: 8,
+        category: "99c7f9c5-2b56-453d-84e1-d1fe3814ad47",
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
 ]
@@ -163,8 +163,21 @@ router.get('/add', async (req, res) => {
             })
         console.log(newProd);
     })
-    // res.json(admins)
 })
+    
+router.get('/all', async (req, res) => {
+    const connection = getConnection()
+
+    console.log(connection);
+    const products = await connection
+        .getRepository("product")
+        .find()
+        .catch(error => {
+            console.log(error);
+        })
+    res.json(products)
+})
+  
 
 
 
