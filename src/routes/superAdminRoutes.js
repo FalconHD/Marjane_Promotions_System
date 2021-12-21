@@ -69,5 +69,4 @@ router.post('/super/login', async (req, res) => {
     }
 })
 
-
 export { router as superAdmin }

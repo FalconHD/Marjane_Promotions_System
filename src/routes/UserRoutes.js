@@ -33,12 +33,8 @@ router.get('/user/:id', async (req, res) => {
 })
 
 router.get('/all', async (req, res) => {
-
-
-
     res.json({
         users: []
-
     })
 })
 
