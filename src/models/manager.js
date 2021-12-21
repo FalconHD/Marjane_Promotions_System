@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany ,OneToOne ,JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { category } from "./category";
 import { center } from "./center";
 
@@ -9,10 +9,10 @@ export class manager {
     id 
 
     @Column("varchar")
-    name 
+    name
 
     @Column("varchar")
-    email 
+    email
 
     @Column("varchar")
     password 

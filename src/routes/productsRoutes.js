@@ -155,7 +155,6 @@ router.get('/add', async (req, res) => {
         newProd.name = p.name
         newProd.category = p.category
         newProd.price = Math.floor(Math.random() * 5000)
-
         newProd = await connection
             .getRepository("product")
             .save(newProd)
@@ -164,8 +163,6 @@ router.get('/add', async (req, res) => {
             })
         console.log(newProd);
     })
-
-
     // res.json(admins)
 })
 
