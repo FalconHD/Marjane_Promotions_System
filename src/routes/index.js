@@ -3,3 +3,4 @@ export { userRoutes } from './UserRoutes';
 export { Category } from './categoryRoutes';
 export { adminCenter } from './adminCenterRoutes';
 export { Products } from './productsRoutes';
+export { promotion } from './promotionRoutes';

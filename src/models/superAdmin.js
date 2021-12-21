@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOn
 @Entity()
 export class superAdmin {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id 
 
     @Column("varchar")

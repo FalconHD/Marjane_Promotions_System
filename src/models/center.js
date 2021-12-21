@@ -4,7 +4,7 @@ import { adminCenter } from "./adminCenter";
 @Entity()
 export class center {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id 
 
     @Column("varchar")

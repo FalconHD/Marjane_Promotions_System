@@ -5,7 +5,7 @@ import { product } from "./product";
 @Entity()
 export class promotion {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id 
 
     @Column("int")

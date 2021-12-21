@@ -1,8 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
 import { adminCenter } from "../models";
-import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
-import { isAdCenter } from "../middleware/profiles";
+import { hashPassword, checkPassword, generateToken, isAdCenter } from "../middleware";
 
 
 const router = Router();
