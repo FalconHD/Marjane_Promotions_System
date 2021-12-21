@@ -1,18 +1,19 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { superAdmin } from "../models";
+import { adminCenter } from "../models";
 import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
+import { isAdCenter } from "../middleware/profiles";
 
 
 const router = Router();
 
 
-router.get('/all', isSuper, async (req, res) => {
+router.get('/all',isAdCenter, async (req, res) => {
     const connection = getConnection()
 
     console.log(connection);
     const admins = await connection
-        .getRepository("super_admin")
+        .getRepository("admin_center")
         .find()
         .catch(error => {
             console.log(error);
@@ -23,7 +24,7 @@ router.get('/all', isSuper, async (req, res) => {
 router.get('/:id', async (req, res) => {
     const connection = getConnection()
     const id = req.params.id
-    const users = await connection.getRepository("super_admin").findOne({
+    const users = await connection.getRepository("admin_center").findOne({
         where: {
             id
         }
@@ -34,17 +35,17 @@ router.get('/:id', async (req, res) => {
 router.post('/add', async (req, res) => {
     const connection = getConnection()
     const { email, password } = req.body
-    let admin = new superAdmin();
+    let admin = new adminCenter();
     admin.email = email;
     admin.password = await hashPassword(password);
-    admin = await connection.getRepository("super_admin").save(admin)
+    admin = await connection.getRepository("admin_center").save(admin)
     res.json(admin)
 })
 
 router.post('/login', async (req, res) => {
     const connection = getConnection()
     const { email, password } = req.body
-    const admin = await connection.getRepository("super_admin").findOne({
+    const admin = await connection.getRepository("admin_center").findOne({
         where: {
             email
             
@@ -53,7 +54,7 @@ router.post('/login', async (req, res) => {
     if (admin) {
         const isValid = await checkPassword(password, admin.password)
         if (isValid) {
-            const token = generateToken(admin, process.env.JWT_SUPER_SECRET, "super_admin")
+            const token = generateToken(admin, process.env.JWT_CENTER_SECRET, "admin_center")
             res.json({
                 data: admin,
                 token
@@ -71,4 +72,4 @@ router.post('/login', async (req, res) => {
 })
 
 
-export { router as superAdmin }
+export { router as adminCenter }
