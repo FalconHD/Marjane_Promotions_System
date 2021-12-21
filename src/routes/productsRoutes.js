@@ -1,126 +1,66 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { superAdmin } from "../models";
+import { superAdmin, product } from "../models";
 import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
 
 
 const router = Router();
 
-//products catgeory  array 
-let productsCategory = [
-    {
-        name: "Electronics",
-    },
-    {
-        name: "Fashion",
-    },
-    {
-        name: "Home & Garden",
-    },
-    {
-        name: "Sports",
-    },
-    {
-        name: "Books",
-    },
-    {
-        name: "Toys",
-    },
-    {
-        name: "Health & Beauty",
-    },
-    {
-        name: "Automotive",
-    }]
-
-
 //products array with category id 
-let products = [
+let electrs = [
     {
-        id: 1,
+
         name: "Apple iPhone XR (64GB) - Space Gray",
         price: "1,000",
         category: 1,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 2,
+
         name: "Apple iPhone XR (64GB) - Silver",
         price: "1,000",
         category: 1,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 3,
+
         name: "Apple iPhone XR (64GB) - Gold",
         price: "1,000",
         category: 1,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
-    },
-    {
-        id: 4,
-        name: "Apple iPhone XR (64GB) - Rose Gold",
-        price: "1,000",
-        category: 1,
-        image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
-    },
-    {
-        id: 5,
-        name: "Apple iPhone XR (64GB) - Black",
-        price: "1,000",
-        category: 1,
-        image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
-    },
-    {
-        id: 6,
-        name: "Apple iPhone XR (64GB) - White",
-        price: "1,000",
-        category: 1,
-        image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
-    },
-    {
-        id: 7,
-
-
-
     }
 ]
 
 
-//toys array with category id
+//toys array with category 
 let toys = [
     {
-        id: 1,
+
         name: "Toy Car",
         price: "1,000",
         category: 6,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 2,
+
         name: "Toy Car",
         price: "1,000",
         category: 6,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
-    },
-    {
-        id: 3,
-
-
     }
 ]
 
-//fashion array with category id
+//fashion array with category 
 let fashion = [
     {
-        id: 1,
+
         name: "Fashion product 1",
         price: "1,000",
         category: 2,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 2,
+
         name: "Fashion product 2",
         price: "1,000",
         category: 2,
@@ -129,17 +69,17 @@ let fashion = [
     },
 ]
 
-//home & garden array with category id
+//home & garden array with category 
 let homeGarden = [
     {
-        id: 1,
+
         name: "Home & Garden product 1",
         price: "1,000",
         category: 3,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 2,
+
         name: "Home & Garden product 2",
         price: "1,000",
         category: 3,
@@ -147,17 +87,17 @@ let homeGarden = [
     },
 ]
 
-//sports array with category id
+//sports array with category 
 let sports = [
     {
-        id: 1,
+
         name: "Sports product 1",
         price: "1,000",
         category: 4,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 2,
+
         name: "Sports product 2",
         price: "1,000",
         category: 4,
@@ -165,17 +105,17 @@ let sports = [
     },
 ]
 
-//health & beauty array with category id
+//health & beauty array with category 
 let healthBeauty = [
     {
-        id: 1,
+
         name: "Health & Beauty product 1",
         price: "1,000",
         category: 7,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 2,
+
         name: "Health & Beauty product 2",
         price: "1,000",
         category: 7,
@@ -183,17 +123,17 @@ let healthBeauty = [
     },
 ]
 
-//automotive array with category id
+//automotive array with category 
 let automotive = [
     {
-        id: 1,
+
         name: "Automotive product 1",
         price: "1,000",
         category: 8,
         image: "https://images-na.ssl-images-amazon.com/images/I/61-QZq-QZGL._SL1500_.jpg"
     },
     {
-        id: 2,
+
         name: "Automotive product 2",
         price: "1,000",
         category: 8,
@@ -207,19 +147,28 @@ let automotive = [
 
 
 
-router.get('/all', isSuper, async (req, res) => {
+router.get('/add', async (req, res) => {
     const connection = getConnection()
+    const allo = [...electrs, ...toys, ...fashion, ...homeGarden, ...sports, ...healthBeauty, ...automotive]
+    allo.forEach(async (p) => {
+        let newProd = new product()
+        newProd.name = p.name
+        newProd.category = p.category
+        newProd.price = Math.floor(Math.random() * 5000)
 
-    console.log(connection);
-    const admins = await connection
-        .getRepository("products")
+        newProd = await connection
+            .getRepository("product")
+            .save(newProd)
+            .catch(error => {
+                console.log(error);
+            })
+        console.log(newProd);
+    })
 
-        .catch(error => {
-            console.log(error);
-        })
-    res.json(admins)
+
+    // res.json(admins)
 })
 
 
 
-export { router as superAdmin }
+export { router as Products }
