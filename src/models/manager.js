@@ -1,12 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, OneToOne, JoinColumn, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, OneToOne, JoinColumn, CreateDateColumn, Unique } from "typeorm";
 import { category } from "./category";
 import { center } from "./center";
 
 @Entity()
+@Unique(["email"])
 export class manager {
 
     @PrimaryGeneratedColumn('uuid')
-    id 
+    id
 
     @Column("varchar")
     name
@@ -15,7 +16,7 @@ export class manager {
     email
 
     @Column("varchar")
-    password 
+    password
 
     @CreateDateColumn()
     createdAt = undefined;

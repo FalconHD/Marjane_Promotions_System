@@ -1,13 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, Unique } from "typeorm";
 
 @Entity()
+@Unique(["email"])
 export class superAdmin {
 
     @PrimaryGeneratedColumn('uuid')
-    id 
+    id
 
     @Column("varchar")
-    email 
+    email
 
     @Column("varchar")
     password

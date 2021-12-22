@@ -1,13 +1,13 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { superAdmin } from "../models";
-import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
+import { adminCenter, logs, superAdmin } from "../models";
+import { hashPassword, checkPassword, generateToken, isSuper, generatePassword, sendEmail, verifyToken } from "../middleware";
 
 
 const router = Router();
 
 
-router.get('/all', isSuper, async (req, res) => {
+router.get('/all', async (req, res) => {
     const connection = getConnection()
     console.log(connection);
     const admins = await connection
@@ -58,14 +58,15 @@ router.post('/adCenter', isSuper, async (req, res) => {
     //create log
     const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_SUPER_SECRET)
     console.log(tokensData);
-
     let logMsg = new logs();
     logMsg.message = ` ${tokensData.id} create an admin Center: ${admin.id} `;
     logMsg.target = tokensData.id;
     logMsg.status = 'created';
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
         console.log(error);
-        console.log(error);
+    })
+    res.json({
+        message: "admin center added"
     })
 })
 
