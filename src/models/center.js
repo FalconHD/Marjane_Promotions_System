@@ -13,6 +13,9 @@ export class center {
     @Column("varchar")
     city 
 
+    @Column("timestamp")
+    created_at
+
     @OneToOne(() => adminCenter, admin => admin.center)
     @JoinColumn()
 

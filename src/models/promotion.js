@@ -14,10 +14,15 @@ export class promotion {
     @Column("int")
     carteFidélité
 
+    @Column("timestamp")
+    created_at
+
     @ManyToOne(() => adminCenter, admin => admin.adminCenter, { cascade: true })
     adminCenter
 
     @ManyToOne(() => product, product => product.products)
     product
+
+    
 
 }

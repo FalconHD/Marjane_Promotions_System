@@ -13,6 +13,11 @@ export class product {
     @Column("float")
     price
 
+    @Column("timestamp")
+    created_at
+
     @ManyToOne(() => category, cat => cat.products, { cascade: true })
     category
+
+   
 }
