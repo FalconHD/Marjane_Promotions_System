@@ -7,7 +7,7 @@ import { hashPassword, checkPassword, generateToken, isAdCenter } from "../middl
 const router = Router();
 
 
-router.get('/all',isAdCenter, async (req, res) => {
+router.get('/all', isAdCenter, async (req, res) => {
     const connection = getConnection()
 
     console.log(connection);
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
     const admin = await connection.getRepository("admin_center").findOne({
         where: {
             email
-            
+
         }
     })
     if (admin) {

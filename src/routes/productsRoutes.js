@@ -1,6 +1,6 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { superAdmin, product } from "../models";
+import { superAdmin, product, category } from "../models";
 import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
 
 
@@ -146,11 +146,16 @@ let automotive = [
 
 router.get('/add', async (req, res) => {
     const connection = getConnection()
+
+    const cetegories = await connection.getRepository(category).find()
+
+    console.log(cetegories);
+
     const allo = [...electrs, ...toys, ...fashion, ...homeGarden, ...sports, ...healthBeauty, ...automotive]
     allo.forEach(async (p) => {
         let newProd = new product()
         newProd.name = p.name
-        newProd.category = p.category
+        newProd.category = cetegories[Math.floor(Math.random() * cetegories.length)]
         newProd.price = Math.floor(Math.random() * 5000)
         newProd = await connection
             .getRepository("product")
@@ -161,20 +166,22 @@ router.get('/add', async (req, res) => {
         console.log(newProd);
     })
 })
-    
+
 router.get('/all', async (req, res) => {
     const connection = getConnection()
 
     console.log(connection);
     const products = await connection
         .getRepository("product")
-        .find()
+        .find({
+            relations: ['category']
+        })
         .catch(error => {
             console.log(error);
         })
     res.json(products)
 })
-  
+
 
 
 
