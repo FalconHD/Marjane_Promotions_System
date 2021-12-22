@@ -56,7 +56,7 @@ router.post('/adCenter' ,isSuper, async (req, res)=>{
     sendEmail(email,password);
     admin = await connection.getRepository("admin_center").save(admin)
 
-    //create log
+    //create logs
         const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_SUPER_SECRET)
         console.log(tokensData);
 
@@ -65,6 +65,7 @@ router.post('/adCenter' ,isSuper, async (req, res)=>{
     logMsg.target = tokensData.id;
     logMsg.status = 'created';
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
+        console.log(error);
         console.log(error);
     })
 })
