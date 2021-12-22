@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { adminCenter, superAdmin ,logs } from "../models";
-import { hashPassword, checkPassword, generateToken, isSuper ,generatePassword , sendEmail, verifyToken } from "../middleware";
+import { superAdmin } from "../models";
+import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
 
 
 const router = Router();
@@ -9,7 +9,6 @@ const router = Router();
 
 router.get('/all', isSuper, async (req, res) => {
     const connection = getConnection()
-
     console.log(connection);
     const admins = await connection
         .getRepository("super_admin")
@@ -19,6 +18,9 @@ router.get('/all', isSuper, async (req, res) => {
         })
     res.json(admins)
 })
+
+//alloo
+console.log("test");
 
 router.get('/:id', async (req, res) => {
     const connection = getConnection()
@@ -39,12 +41,9 @@ router.post('/add', async (req, res) => {
     admin.password = await hashPassword(password);
     admin = await connection.getRepository("super_admin").save(admin)
     res.json(admin)
-
-    //
-    
 })
 
-router.post('/adCenter' ,isSuper, async (req, res)=>{
+router.post('/adCenter', isSuper, async (req, res) => {
     const password = await generatePassword();
     const connection = getConnection()
     const { email } = req.body
@@ -53,12 +52,12 @@ router.post('/adCenter' ,isSuper, async (req, res)=>{
     admin.password = await hashPassword(password);
 
     //Send Email 
-    sendEmail(email,password);
+    sendEmail(email, password);
     admin = await connection.getRepository("admin_center").save(admin)
 
     //create log
-        const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_SUPER_SECRET)
-        console.log(tokensData);
+    const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_SUPER_SECRET)
+    console.log(tokensData);
 
     let logMsg = new logs();
     logMsg.message = ` ${tokensData.id} create an admin Center: ${admin.id} `;
@@ -89,7 +88,7 @@ router.post('/login', async (req, res) => {
             })
         } else {
             res.json({
-                message: "Invalid Password"
+                message: "Invalid password"
             })
         }
     } else {
@@ -98,6 +97,11 @@ router.post('/login', async (req, res) => {
         })
     }
 })
+
+
+
+
+
 
 router.use((req, res, next) => {
     next()
