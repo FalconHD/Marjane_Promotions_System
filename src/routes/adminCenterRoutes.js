@@ -31,14 +31,19 @@ router.get('/:id', async (req, res) => {
     res.json(users)
 })
 
-router.post('/add', async (req, res) => {
+router.post('/add', async (req, res, next) => {
     const connection = getConnection()
     const { email, password } = req.body
     let admin = new adminCenter();
     admin.email = email;
     admin.password = await hashPassword(password);
-    admin = await connection.getRepository("admin_center").save(admin)
+    admin = await connection.getRepository("admin_center").save(admin).catch(error => {
+        console.log(error.message);
+    })
+
     res.json(admin)
+
+
 })
 
 

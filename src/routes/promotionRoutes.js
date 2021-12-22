@@ -10,7 +10,7 @@ const router = Router();
 
 router.post('/add', isAdCenter, async (req, res, next) => {
     try {
-        // const { id } = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET);
+        const { id } = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET);
         const connection = getConnection()
         const { pourcentage, product } = req.body
         const productCategory = await connection.getRepository("product").findOne({
@@ -20,25 +20,20 @@ router.post('/add', isAdCenter, async (req, res, next) => {
             }
         })
         console.log(productCategory);
-
-    //     //product not found in database
-    if (!productCategory) throw new Error("product not found")
-
-    const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
-    console.log(tokensData);
-        
+        //product not found in database
+        if (!productCategory) throw new Error("product not found")
 
         let promo = new promotion();
         promo.pourcentage = pourcentage;
         promo.carteFidélité = calculateFidelity(pourcentage, productCategory.category.name);
-        promo.adminCenter = tokensData.id;
+        promo.adminCenter = id;
         promo.product = product;
         promo = await connection.getRepository("promotion").save(promo)
 
         //generating logs for the promotion
         let logMsg = new logs();
-        logMsg.message = `${ tokensData.id} create promotion: ${promo.id} || Product : ${product}`;
-        logMsg.target =  tokensData.id;
+        logMsg.message = `${id} create promotion: ${promo.id} || Product : ${product}`;
+        logMsg.target = id;
         logMsg.status = 'created';
         logMsg = await connection.getRepository("logs").save(logMsg)
         res.json({
