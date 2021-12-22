@@ -65,7 +65,6 @@ router.post('/adCenter', isSuper, async (req, res) => {
     logMsg.status = 'created';
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
         console.log(error);
-        console.log(error);
     })
 })
 
@@ -76,7 +75,6 @@ router.post('/login', async (req, res) => {
     const admin = await connection.getRepository("super_admin").findOne({
         where: {
             email
-
         }
     })
     if (admin) {
