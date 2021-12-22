@@ -49,7 +49,6 @@ router.post('/login', async (req, res) => {
     const admin = await connection.getRepository("admin_center").findOne({
         where: {
             email
-
         }
     })
     if (admin) {
