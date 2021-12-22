@@ -100,14 +100,8 @@ router.post('/login', async (req, res) => {
 })
 
 
-
-
-
-
 router.use((req, res, next) => {
     next()
 })
-
-
 
 export { router as superAdmin }

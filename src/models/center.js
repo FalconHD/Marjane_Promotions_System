@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany ,OneToOne ,JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany ,OneToOne ,JoinColumn, CreateDateColumn } from "typeorm";
 import { adminCenter } from "./adminCenter";
 
 @Entity()
@@ -13,8 +13,8 @@ export class center {
     @Column("varchar")
     city 
 
-    @Column("timestamp")
-    created_at
+    @CreateDateColumn()
+    createdAt = undefined;
 
     @OneToOne(() => adminCenter, admin => admin.center)
     @JoinColumn()

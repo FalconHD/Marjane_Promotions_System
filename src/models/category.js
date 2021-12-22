@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
 
 @Entity()
 export class category {
@@ -9,7 +9,7 @@ export class category {
     @Column("varchar")
     name 
 
-    @Column("timestamp")
-    created_at
+    @CreateDateColumn()
+    createdAt = undefined;
 
 }

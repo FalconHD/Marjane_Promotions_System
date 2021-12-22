@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, OneToOne, JoinColumn, CreateDateColumn } from "typeorm";
 import { category } from "./category";
 import { center } from "./center";
 
@@ -17,9 +17,9 @@ export class manager {
     @Column("varchar")
     password 
 
-    @Column("timestamp")
-    created_at
-    
+    @CreateDateColumn()
+    createdAt = undefined;
+
     @OneToOne(() => center, cent => cent.managers, { cascade: true })
     @JoinColumn()
     center

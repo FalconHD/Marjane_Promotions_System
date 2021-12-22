@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
 import { adminCenter } from "./adminCenter";
 import { product } from "./product";
 
@@ -14,8 +14,8 @@ export class promotion {
     @Column("int")
     carteFidélité
 
-    @Column("timestamp")
-    created_at
+    @CreateDateColumn()
+    createdAt = undefined;
 
     @ManyToOne(() => adminCenter, admin => admin.adminCenter, { cascade: true })
     adminCenter
