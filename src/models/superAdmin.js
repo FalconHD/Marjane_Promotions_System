@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
 
 @Entity()
 export class superAdmin {
@@ -12,7 +12,7 @@ export class superAdmin {
     @Column("varchar")
     password
 
-    @Column("timestamp")
-    created_at
+    @CreateDateColumn()
+    createdAt = undefined;
 
 }

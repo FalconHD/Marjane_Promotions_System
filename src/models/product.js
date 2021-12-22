@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
 import { category } from "./category";
 
 @Entity()
@@ -13,8 +13,8 @@ export class product {
     @Column("float")
     price
 
-    @Column("timestamp")
-    created_at
+    @CreateDateColumn()
+    createdAt = undefined;
 
     @ManyToOne(() => category, cat => cat.products, { cascade: true })
     category
