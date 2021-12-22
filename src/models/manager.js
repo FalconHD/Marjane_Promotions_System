@@ -16,6 +16,9 @@ export class manager {
 
     @Column("varchar")
     password 
+
+    @Column("timestamp")
+    created_at
     
     @OneToOne(() => center, cent => cent.managers, { cascade: true })
     @JoinColumn()

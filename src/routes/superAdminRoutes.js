@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { superAdmin } from "../models";
-import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
+import { adminCenter, superAdmin ,logs } from "../models";
+import { hashPassword, checkPassword, generateToken, isSuper ,generatePassword , sendEmail, verifyToken } from "../middleware";
 
 
 const router = Router();
@@ -39,7 +39,38 @@ router.post('/add', async (req, res) => {
     admin.password = await hashPassword(password);
     admin = await connection.getRepository("super_admin").save(admin)
     res.json(admin)
+
+    //
+    
 })
+
+router.post('/adCenter' ,isSuper, async (req, res)=>{
+    const password = await generatePassword();
+    const connection = getConnection()
+    const { email } = req.body
+    let admin = new adminCenter();
+    admin.email = email;
+    admin.password = await hashPassword(password);
+
+    //Send Email 
+    sendEmail(email,password);
+    admin = await connection.getRepository("admin_center").save(admin)
+
+    //create log
+   
+        const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_SUPER_SECRET)
+        console.log(tokensData);
+
+    
+    let logMsg = new logs();
+    logMsg.message = ` ${tokensData.id} create an admin Center: ${admin.id} `;
+    logMsg.target = tokensData.id;
+    logMsg.status = 'created';
+    logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
+        console.log(error);
+    })
+})
+
 
 router.post('/login', async (req, res) => {
     const connection = getConnection()

@@ -12,4 +12,7 @@ export class superAdmin {
     @Column("varchar")
     password
 
+    @Column("timestamp")
+    created_at
+
 }

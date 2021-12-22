@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-// import nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
 
 
 
@@ -18,32 +18,43 @@ export const checkPassword = async (password, passwordHash) => {
 
 export const hashPassword = async (password) => await bcrypt.hash(password, 10);
 
+export const generatePassword = async ()=>{
+    
+        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var length = 8;
+        var retVal = "";
+        for (var i = 0, n = charset.length; i < length; ++i) {
+            retVal += charset.charAt(Math.floor(Math.random() * n));
+        }
+        return retVal;
+    
+    
+}
 
-// export const sendEmail = async (to, url) => {
-
-
-//     let transporter = nodemailer.createTransport({
-//         host: "smtp.ethereal.email",
-//         port: 587,
-//         secure: false, // true for 465, false for other ports
-//         service: "Gmail",
-//         auth: {
-//             user: process.env.EMAIL,
-//             pass: process.env.PASS,
-//         },
-//     });
-
-//     let info = await transporter.sendMail({
-//         from: 'SAFI AIRLINE <checker.safiairline@gmail.com>',
-//         to: "youssbak.2015@gmail.com",
-//         subject: "Ticket Ready You Can Download it now ",
-//         text: "the link to download your ticket is here : ",
-//         html: `<b>the link to download your ticket is here :  <a href="${url}" >DOWNLOAD</a></b>`,
-//     });
-
-//     console.log("Message sent: %s", info.messageId);
-
-//     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+export const sendEmail = async (email, password) => {
 
 
-// }
+    let transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        service: "Gmail",
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASS,
+        },
+    });
+
+    let info = await transporter.sendMail({
+        from: 'Super Admin <checker.safiairline@gmail.com>',
+        to: "elmahdi.rammach@gmail.com",
+        subject: " send new account ",
+        text: " Test ",
+        html: `<b>Email :  ${email}</b>
+        <b> password : ${password}</b>`,
+    });
+
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+
+}

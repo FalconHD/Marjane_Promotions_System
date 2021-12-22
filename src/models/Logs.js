@@ -16,7 +16,8 @@ export class logs {
     @Column("varchar")
     status
 
-    
+    @Column("timestamp")
+    created_at
 
 
 }

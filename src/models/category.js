@@ -9,4 +9,7 @@ export class category {
     @Column("varchar")
     name 
 
+    @Column("timestamp")
+    created_at
+
 }

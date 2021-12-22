@@ -13,5 +13,8 @@ export class adminCenter {
     @Column("varchar")
     password
 
+    @Column("timestamp")
+    created_at
+
 
 }
