@@ -44,9 +44,6 @@ router.post('/add', async (req, res) => {
     
 })
 
-<<<<<<< HEAD
-router.post('/login', async (req, res, next) => {
-=======
 router.post('/adCenter' ,isSuper, async (req, res)=>{
     const password = await generatePassword();
     const connection = getConnection()
@@ -76,7 +73,6 @@ router.post('/adCenter' ,isSuper, async (req, res)=>{
 
 
 router.post('/login', async (req, res) => {
->>>>>>> 4446c284549822d6058d058d299a97836c3227c3
     const connection = getConnection()
     const { email, password } = req.body
     const admin = await connection.getRepository("super_admin").findOne({
