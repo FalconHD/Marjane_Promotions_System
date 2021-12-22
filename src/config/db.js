@@ -8,7 +8,7 @@ export const connection = async () => {
         username: process.env.DB_USER,
         password: process.env.DB_PASS,
         database: process.env.DB_NAME,
-        synchronize: false,
+        synchronize: true,
         logging: false,
         
         entities: ["src/models/*.js"],
