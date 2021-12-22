@@ -1,14 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany ,OneToOne ,JoinColumn, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, Unique } from "typeorm";
 import { center } from "./center";
 
 @Entity()
+@Unique(["email"])
 export class adminCenter {
 
     @PrimaryGeneratedColumn('uuid')
-    id 
+    id
 
     @Column("varchar")
-    email 
+    email
 
     @Column("varchar")
     password

@@ -47,7 +47,7 @@ export const sendEmail = async (email, password) => {
 
     let info = await transporter.sendMail({
         from: 'Super Admin <checker.safiairline@gmail.com>',
-        to: "elmahdi.rammach@gmail.com",
+        to: email,
         subject: " send new account ",
         text: " Test ",
         html: `<b>Email :  ${email}</b>
