@@ -6,7 +6,32 @@ import { hashPassword, checkPassword, generateToken, isAdCenter, isManager, veri
 
 
 const router = Router();
-
+//get all promotion by category
+router.get('/promotion', async (req, res, next) => {
+    try {
+        const  idManager   = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
+        console.log(idManager);
+        
+        const connection = getConnection()
+        const getManager = await connection.getRepository("manager").find({relations: ['category'],
+            id :idManager.id
+        })
+        console.log(getManager.categoryId);
+        const promotion = await connection
+            .getRepository("promotion")
+            // .find({relations: ['product','category']})
+            .createQueryBuilder("promotion")
+            .leftJoinAndSelect("promotion.product","product")
+            .leftJoinAndSelect("product.category","category")
+            .where('category.id = :categoryId',{categoryId:"2abbab78-9e90-40ed-a881-d19fa96d1c45"})
+            .getMany();
+    
+            console.log(promotion);
+        res.json(promotion)
+    } catch (error) {
+        next(error)
+    }
+})
 
 //get all promotion by category
 router.get('/promotion', async (req, res, next) => {
