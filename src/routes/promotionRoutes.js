@@ -3,6 +3,7 @@ import { Router } from "express"
 import { promotion } from "../models";
 import { hashPassword, checkPassword, generateToken, isSuper, isAdCenter, calculateFidelity, verifyToken } from "../middleware";
 import { logs } from "../models/Logs";
+import { isManager } from "../middleware/profiles";
 
 
 const router = Router();
@@ -45,18 +46,46 @@ router.post('/add', isAdCenter, async (req, res, next) => {
 })
 
 
-router.get('/all', isAdCenter, async (req, res, next) => {
+router.get('/all',isManager, async (req, res, next) => {
     try {
+        const  getcategory  = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
+        //
+
+
         const connection = getConnection()
-        const promotions = await connection
+        // const category = await connection.getRepository("manager").find({relations: ['category','center']})
+        
+        const promotion = await connection
             .getRepository("promotion")
-            .find({
-                relations: ["product", "adminCenter"]
-            })
-            .catch(error => {
-                console.log(error);
-            })
-        res.json(promotions)
+            // .find({relations: ['product','category']})
+            .createQueryBuilder("promotion")
+            .leftJoinAndSelect("promotion.product","product")
+            .leftJoinAndSelect("product.category","category")
+            // 
+            .getMany();
+            // .find({
+            //     // relations: ["product", "category"]
+            //     // join:{
+            //     //     alias:'promotion',
+            //     //     innerJoin: {
+            //     //         alias:'product',
+            //     //         join:{
+            //     //             alias:'product',
+            //     //             innerJoin: {
+            //     //                 alias:'category',
+            //     //                 on:'product.categoryId = category.id',
+                            
+            //     //             },
+            //     //         },
+            //     //         on:'promotion.productId = product.id'
+            //     //     },
+            //     // },
+            // })
+    
+
+            
+            console.log(promotion);
+        res.json(promotion)
     } catch (error) {
         next(error)
     }

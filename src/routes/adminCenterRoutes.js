@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { adminCenter } from "../models";
-import { hashPassword, checkPassword, generateToken, isAdCenter } from "../middleware";
+import { adminCenter, manager ,logs } from "../models";
+import { hashPassword, checkPassword, generateToken, isAdCenter, generatePassword, sendEmail } from "../middleware";
 
 
 const router = Router();
@@ -43,6 +43,43 @@ router.post('/add', async (req, res, next) => {
 
     res.json(admin)
 
+
+})
+
+router.post('/addManger',isAdCenter, async (req, res, next) => {
+    const password = await generatePassword();
+    const connection = getConnection()
+    const { name , email  ,center ,category} = req.body
+    let managerRayon = new manager();
+    managerRayon.name = name
+    managerRayon.email = email;
+    managerRayon.password = await hashPassword(password);
+    managerRayon.center = center
+    managerRayon.category = category
+
+    //Send Email 
+    sendEmail(email, password); 
+
+    managerRayon = await connection.getRepository("manager").save(managerRayon).catch(error => {
+        console.log(error.message);
+
+    
+    })
+
+    //create log
+    const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
+    console.log(tokensData);
+    let logMsg = new logs();
+    logMsg.message = ` Admin Center :${tokensData.id} create an manger Center: ${managerRayon.id} `;
+    logMsg.target = tokensData.id;
+    logMsg.status = 'created';
+    logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
+        console.log(error);
+    })
+    res.json({
+        message: "manager center added"
+    })
+   
 
 })
 
