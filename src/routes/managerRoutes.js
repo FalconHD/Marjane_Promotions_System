@@ -1,7 +1,7 @@
 import { Between, getConnection, MoreThanOrEqual } from "typeorm";
 import { Router } from "express"
 import { manager } from "../models";
-import { hashPassword, checkPassword, generateToken, isAdCenter, isManager, verifyToken } from "../middleware";
+import { isMorning, checkPassword, generateToken, isAdCenter, isManager, verifyToken } from "../middleware";
 
 
 
@@ -34,7 +34,7 @@ const router = Router();
 // })
 
 //get all promotion by category
-router.get('/promotion', async (req, res, next) => {
+router.get('/promotion', isManager, isMorning, async (req, res, next) => {
     try {
         const getcategory = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
         const connection = getConnection()
@@ -45,10 +45,8 @@ router.get('/promotion', async (req, res, next) => {
             relations: ['category', 'center', 'center.adminCenter']
         })
 
-        const start = `${(new Date()).toISOString().split('T')[0]} 08:00:00`
-        const end = `${(new Date()).toISOString().split('T')[0]} 12:00:00`
-
-        console.log(start,end);
+        const start = `${(new Date()).toISOString().split('T')[0]} 00:00:00`
+        const end = `${(new Date()).toISOString().split('T')[0]} 11:59:59`
 
         const promotion = await connection
             .getRepository("promotion")
