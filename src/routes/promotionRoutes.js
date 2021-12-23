@@ -19,7 +19,7 @@ router.post('/add', isAdCenter, async (req, res, next) => {
                 id: product
             }
         })
-        console.log(productCategory);
+
         //product not found in database
         if (!productCategory) throw new Error("product not found")
 
