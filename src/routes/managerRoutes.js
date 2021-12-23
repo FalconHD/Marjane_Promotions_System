@@ -1,4 +1,4 @@
-import { getConnection } from "typeorm";
+import { Between, getConnection, MoreThanOrEqual } from "typeorm";
 import { Router } from "express"
 import { manager } from "../models";
 import { hashPassword, checkPassword, generateToken, isAdCenter, isManager, verifyToken } from "../middleware";
@@ -45,13 +45,19 @@ router.get('/promotion', async (req, res, next) => {
             relations: ['category', 'center', 'center.adminCenter']
         })
 
+        const start = `${(new Date()).toISOString().split('T')[0]} 08:00:00`
+        const end = `${(new Date()).toISOString().split('T')[0]} 12:00:00`
+
+        console.log(start,end);
+
         const promotion = await connection
             .getRepository("promotion")
             .find({
                 relations: ['product', "product.category", "adminCenter", "adminCenter.center"],
                 where: {
                     product: { category: manager.category.id },
-                    adminCenter: { id: manager.center.adminCenter.id }
+                    adminCenter: { id: manager.center.adminCenter.id },
+                    createdAt: Between(start, end)
                 }
             })
         res.json(promotion)
