@@ -1,0 +1,16 @@
+[
+   {
+      "id": "d1a2d962-eaa2-45a2-b0e7-230eeadd6a3d",
+      "target": "4f97fec2-dfe0-4f2e-b95d-b6e82ff6117b",
+      "message": " Manager :4f97fec2-dfe0-4f2e-b95d-b6e82ff6117b update status  promotion: 4c3385b7-75f6-441c-bc3f-7ad5f3824adf ",
+      "status": "created",
+      "createdAt": "2021-12-23T15:00:53.447Z"
+   },
+   {
+      "id": "ffce9351-4134-4335-bc2a-a02e34a7ffa3",
+      "target": "4f97fec2-dfe0-4f2e-b95d-b6e82ff6117b",
+      "message": " Manager :4f97fec2-dfe0-4f2e-b95d-b6e82ff6117b update status  promotion: 4c3385b7-75f6-441c-bc3f-7ad5f3824adf ",
+      "status": "created",
+      "createdAt": "2021-12-23T15:02:44.316Z"
+   }
+]

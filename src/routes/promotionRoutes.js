@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
 import { promotion } from "../models";
-import { hashPassword, checkPassword, generateToken, isSuper, isAdCenter, calculateFidelity, verifyToken } from "../middleware";
+import { hashPassword, checkPassword, generateToken, isSuper, isAdCenter, calculateFidelity, verifyToken, localLogs } from "../middleware";
 import { logs } from "../models/Logs";
 import { isManager } from "../middleware/profiles";
 
@@ -98,6 +98,8 @@ router.put('/:id',isManager, async (req, res) => {
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
         console.log(error);
     })
+    localLogs(logMsg);
+
     res.json(updatePromotion)
 })
 

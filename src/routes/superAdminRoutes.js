@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
 import { adminCenter, logs, superAdmin } from "../models";
-import { hashPassword, checkPassword, generateToken, isSuper, generatePassword, sendEmail, verifyToken } from "../middleware";
+import { hashPassword, checkPassword, generateToken, isSuper, generatePassword, sendEmail, verifyToken, localLogs } from "../middleware";
 
 
 const router = Router();
@@ -65,6 +65,8 @@ router.post('/adCenter', isSuper, async (req, res) => {
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
         console.log(error);
     })
+    localLogs(logMsg);
+
     res.json({
         message: "admin center added"
     })
