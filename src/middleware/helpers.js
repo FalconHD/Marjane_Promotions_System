@@ -30,14 +30,14 @@ export const isMorning = (req, res, next) => {
 
 
 export const localLogs = (newLog) => {
-    fs.readFile('logs.json', 'utf8', function readFileCallback(err, data) {
+    fs.readFile('src/public/logs.json', 'utf8', function readFileCallback(err, data) {
         if (err) {
             console.log(err);
         } else {
-            logs = JSON.parse(data);
-            logs.table.push(newLog);
-            json = JSON.stringify(logs);
-            fs.writeFile('logs.json', json, 'utf8', callback);
+            let logs = JSON.parse(data);
+            logs.push(newLog);
+            let json = JSON.stringify(logs,null,3);
+            fs.writeFile('src/public/logs.json', json, 'utf8',(err,data)=>{console.log(data);});
         }
     });
 }
