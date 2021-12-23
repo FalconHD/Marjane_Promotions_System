@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "nodemon --exec babel-node index.js",
     "start": "npm run build && node ./build/app.js",
-    "prod": "node ./build/app.js",
+    "build": "node ./build/app.js",
     "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel src  -d ./build -s",
-    "build": "npm run clean && npm run build-babel"
+    "build-babel": "babel src  -d ./build -s"
   },
   "repository": {
     "type": "git",
