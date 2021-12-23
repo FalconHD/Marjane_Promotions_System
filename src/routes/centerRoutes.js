@@ -21,7 +21,7 @@ const router = Router();
 
 
 
-router.post('/add', async (req, res) => {
+router.post('/add',isSuper, async (req, res) => {
     const { name, city ,adminCenter } = req.body;
     const connection = getConnection()
     // centers.forEach(async cent => {
