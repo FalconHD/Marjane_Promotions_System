@@ -13,6 +13,9 @@ export class product {
     @Column("float")
     price
 
+    @Column("int")
+    quantity
+
     @CreateDateColumn()
     createdAt = undefined;
 

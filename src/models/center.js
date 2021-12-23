@@ -18,7 +18,6 @@ export class center {
 
     @OneToOne(() => adminCenter, admin => admin.center)
     @JoinColumn()
-
     adminCenter
 
 }

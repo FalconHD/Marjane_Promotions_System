@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
 import { adminCenter, manager ,logs } from "../models";
-import { hashPassword, checkPassword, generateToken, isAdCenter, generatePassword, sendEmail } from "../middleware";
+import { hashPassword, checkPassword, generateToken, isAdCenter, generatePassword, sendEmail, verifyToken } from "../middleware";
 
 
 const router = Router();
@@ -65,6 +65,7 @@ router.post('/addManger',isAdCenter, async (req, res, next) => {
 
     
     })
+    console.log(managerRayon);
 
     //create log
     const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
