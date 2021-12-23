@@ -28,6 +28,7 @@ router.post('/add', isAdCenter, async (req, res, next) => {
         promo.pourcentage = pourcentage;
         promo.carteFidélité = calculateFidelity(pourcentage, productCategory.category.name);
         promo.adminCenter = id;
+        promo.status = "pending";
         promo.product = product;
         promo = await connection.getRepository("promotion").save(promo)
 
@@ -46,45 +47,45 @@ router.post('/add', isAdCenter, async (req, res, next) => {
 })
 
 
-router.get('/all',isManager, async (req, res, next) => {
+router.get('/all', isManager, async (req, res, next) => {
     try {
-        const  getcategory  = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
+        const getcategory = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
         //
 
 
         const connection = getConnection()
         // const category = await connection.getRepository("manager").find({relations: ['category','center']})
-        
+
         const promotion = await connection
             .getRepository("promotion")
             // .find({relations: ['product','category']})
             .createQueryBuilder("promotion")
-            .leftJoinAndSelect("promotion.product","product")
-            .leftJoinAndSelect("product.category","category")
+            .leftJoinAndSelect("promotion.product", "product")
+            .leftJoinAndSelect("product.category", "category")
             // 
             .getMany();
-            // .find({
-            //     // relations: ["product", "category"]
-            //     // join:{
-            //     //     alias:'promotion',
-            //     //     innerJoin: {
-            //     //         alias:'product',
-            //     //         join:{
-            //     //             alias:'product',
-            //     //             innerJoin: {
-            //     //                 alias:'category',
-            //     //                 on:'product.categoryId = category.id',
-                            
-            //     //             },
-            //     //         },
-            //     //         on:'promotion.productId = product.id'
-            //     //     },
-            //     // },
-            // })
-    
+        // .find({
+        //     // relations: ["product", "category"]
+        //     // join:{
+        //     //     alias:'promotion',
+        //     //     innerJoin: {
+        //     //         alias:'product',
+        //     //         join:{
+        //     //             alias:'product',
+        //     //             innerJoin: {
+        //     //                 alias:'category',
+        //     //                 on:'product.categoryId = category.id',
 
-            
-            console.log(promotion);
+        //     //             },
+        //     //         },
+        //     //         on:'promotion.productId = product.id'
+        //     //     },
+        //     // },
+        // })
+
+
+
+        console.log(promotion);
         res.json(promotion)
     } catch (error) {
         next(error)

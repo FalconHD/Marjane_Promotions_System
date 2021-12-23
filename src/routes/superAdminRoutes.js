@@ -46,7 +46,7 @@ router.post('/add', async (req, res) => {
 router.post('/adCenter', isSuper, async (req, res) => {
     const password = await generatePassword();
     const connection = getConnection()
-    const { email} = req.body
+    const { email } = req.body
     let admin = new adminCenter();
     admin.email = email;
     admin.password = await hashPassword(password);
@@ -56,7 +56,7 @@ router.post('/adCenter', isSuper, async (req, res) => {
     admin = await connection.getRepository("admin_center").save(admin)
 
     //create log
-    const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
+    const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_SUPER_SECRET)
     console.log(tokensData);
     let logMsg = new logs();
     logMsg.message = ` ${tokensData.id} create an admin Center: ${admin.id} `;
