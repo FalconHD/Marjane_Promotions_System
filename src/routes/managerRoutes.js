@@ -1,6 +1,6 @@
 import { Between, getConnection, MoreThanOrEqual } from "typeorm";
 import { Router } from "express"
-import { manager  } from "../models";
+import { manager } from "../models";
 import { isMorning, checkPassword, generateToken, isAdCenter, isManager, verifyToken } from "../middleware";
 
 
@@ -58,11 +58,11 @@ router.get('/promotion', isManager, isMorning, async (req, res, next) => {
                     createdAt: Between(start, end)
                 }
             })
-            
 
 
-            // //update status the promotion
-            
+
+        // //update status the promotion
+
         res.json(promotion)
     } catch (error) {
         next(error)
@@ -72,19 +72,6 @@ router.get('/promotion', isManager, isMorning, async (req, res, next) => {
 
 
 
-
-router.put('/:id', async (req, res) => {
-    const connection = getConnection()
-    const id = req.params.id
-    let updatePromotion = await connection
-    .createQueryBuilder()
-    .update("promotion")
-    .set({status: "accepted"})
-    .where("id=:id",{id:id})
-    .excute();
-    console.log(id);
-    res.json(updatePromotion)
-})
 
 
 

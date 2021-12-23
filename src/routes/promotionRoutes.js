@@ -32,7 +32,7 @@ router.post('/add', isAdCenter, async (req, res, next) => {
         promo.product = product;
         promo = await connection.getRepository("promotion").save(promo)
 
-       
+
         //generating logs for the promotion
         let logMsg = new logs();
         logMsg.message = `Admin Center: ${id} || create promotion: ${promo.id} || Product : ${product}`;
@@ -92,6 +92,22 @@ router.get('/all', isManager, async (req, res, next) => {
         next(error)
     }
 })
+
+
+
+router.put('/:id', async (req, res) => {
+    const connection = getConnection()
+    const id = req.params.id
+    console.log(id);
+    let updatePromotion = await await connection
+        .createQueryBuilder()
+        .update("promotion")
+        .set({ status: req.body.status })
+        .where("id = :id", { id: id })
+        .execute();
+    res.json(updatePromotion)
+})
+
 
 
 export { router as promotion }
