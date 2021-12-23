@@ -48,63 +48,56 @@ router.post('/add', isAdCenter, async (req, res, next) => {
 })
 
 
-router.get('/all', isManager, async (req, res, next) => {
-    try {
-        const getcategory = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
-        //
+// router.get('/all', isManager, async (req, res, next) => {
+//     try {
+//         const getcategory = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
+//         //
 
 
-        const connection = getConnection()
-        // const category = await connection.getRepository("manager").find({relations: ['category','center']})
+//         const connection = getConnection()
+//         // const category = await connection.getRepository("manager").find({relations: ['category','center']})
 
-        const promotion = await connection
-            .getRepository("promotion")
-            // .find({relations: ['product','category']})
-            .createQueryBuilder("promotion")
-            .leftJoinAndSelect("promotion.product", "product")
-            .leftJoinAndSelect("product.category", "category")
-            // 
-            .getMany();
-        // .find({
-        //     // relations: ["product", "category"]
-        //     // join:{
-        //     //     alias:'promotion',
-        //     //     innerJoin: {
-        //     //         alias:'product',
-        //     //         join:{
-        //     //             alias:'product',
-        //     //             innerJoin: {
-        //     //                 alias:'category',
-        //     //                 on:'product.categoryId = category.id',
-
-        //     //             },
-        //     //         },
-        //     //         on:'promotion.productId = product.id'
-        //     //     },
-        //     // },
-        // })
+//         const promotion = await connection
+//             .getRepository("promotion")
+//             // .find({relations: ['product','category']})
+//             .createQueryBuilder("promotion")
+//             .leftJoinAndSelect("promotion.product", "product")
+//             .leftJoinAndSelect("product.category", "category")
+//             // 
+//             .getMany();
+      
 
 
 
-        console.log(promotion);
-        res.json(promotion)
-    } catch (error) {
-        next(error)
-    }
-})
+//         console.log(promotion);
+//         res.json(promotion)
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 
 
-router.put('/:id', async (req, res) => {
+router.put('/:id',isManager, async (req, res) => {
     const connection = getConnection()
     const id = req.params.id
     console.log(id);
-    let updatePromotion = await await connection
+    let updatePromotion =  await connection
         .createQueryBuilder()
         .update("promotion")
         .set({ status: req.body.status })
         .where("id = :id", { id: id })
         .execute();
+          //create log
+    const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET)
+    console.log(tokensData);
+    let logMsg = new logs();
+    logMsg.message = ` Manager :${tokensData.id} update status  promotion: ${id} `;
+    logMsg.target = tokensData.id;
+    logMsg.status = 'created';
+    logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
+        console.log(error);
+    })
     res.json(updatePromotion)
 })
 
