@@ -32,6 +32,7 @@ router.post('/add', isAdCenter, async (req, res, next) => {
         promo.product = product;
         promo = await connection.getRepository("promotion").save(promo)
 
+       
         //generating logs for the promotion
         let logMsg = new logs();
         logMsg.message = `Admin Center: ${id} || create promotion: ${promo.id} || Product : ${product}`;

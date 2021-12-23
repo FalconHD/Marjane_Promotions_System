@@ -13,3 +13,14 @@ export const calculateFidelity = (pourcentage, { name }) => {
         throw new Error("the PR is not more than 50%")
     }
 }
+
+
+export const isMorning = (req, res, next) => {
+    const currentTime = new Date()
+    const currentHour = currentTime.getHours()
+    if (currentHour >= 8 && currentHour < 12) {
+        next()
+    } else {
+        next(new Error("The promotions are closed"))
+    }
+}
