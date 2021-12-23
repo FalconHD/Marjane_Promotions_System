@@ -10,12 +10,12 @@ export const init = () => {
     app.use(json());
     app.use("/super", superAdmin);
     // app.use("/user", userRoutes);
+    app.use("/manager", manager)
     app.use("/category", Category);
     app.use("/admin", adminCenter);
     app.use("/product", Products);
     app.use("/promotion", promotion);
     app.use("/center", center);
-    app.use("/manager", manager)
 
     // 404
     app.use(notFound)

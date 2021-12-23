@@ -6,13 +6,16 @@ import { product } from "./product";
 export class promotion {
 
     @PrimaryGeneratedColumn('uuid')
-    id 
+    id
 
     @Column("int")
-    pourcentage 
+    pourcentage
 
     @Column("int")
     carteFidélité
+
+    @Column("varchar")
+    status
 
     @CreateDateColumn()
     createdAt = undefined;
@@ -23,6 +26,6 @@ export class promotion {
     @ManyToOne(() => product, product => product.products)
     product
 
-    
+
 
 }

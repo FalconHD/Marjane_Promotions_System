@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
 import { manager } from "../models";
-import { hashPassword, checkPassword, generateToken, isAdCenter ,isManager, verifyToken } from "../middleware";
+import { hashPassword, checkPassword, generateToken, isAdCenter, isManager, verifyToken } from "../middleware";
 
 
 
@@ -33,23 +33,36 @@ router.get('/promotion', async (req, res, next) => {
     }
 })
 
-// router.get('/all', async (req, res) => {
-    
-//     const connection = getConnection()
+//get all promotion by category
+router.get('/promotion', async (req, res, next) => {
+    try {
+        const getcategory = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET);
+        //
 
-//     console.log(connection);
-//     const admins = await connection
-//         .getRepository("promotion")
-//         .find({
-//             where: {
-                
-//             }
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         })
-//     res.json(admins)
-// })
+
+        const connection = getConnection()
+        const manager = await connection.getRepository("manager").findOne({
+            where: {
+                id: getcategory.id
+            },
+            relations: ['category', 'center']
+        })
+        const promotion = await connection
+            .getRepository("promotion")
+            .find({
+                relations: ['product', "product.category", "adminCenter", "adminCenter.center"],
+                where: {
+                    product: { category: manager.category.id },
+                    adminCenter: { center: manager.center.id }
+                }
+            })
+        res.json(promotion)
+    } catch (error) {
+        next(error)
+    }
+})
+
+
 
 router.get('/:id', async (req, res) => {
     const connection = getConnection()
@@ -61,8 +74,6 @@ router.get('/:id', async (req, res) => {
     })
     res.json(users)
 })
-
-
 
 
 
@@ -93,6 +104,9 @@ router.post('/login', async (req, res) => {
         })
     }
 })
+
+
+
 
 
 

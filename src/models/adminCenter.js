@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, Unique } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, Unique, OneToOne, JoinColumn } from "typeorm";
 import { center } from "./center";
 
 @Entity()
@@ -14,7 +14,13 @@ export class adminCenter {
     @Column("varchar")
     password
 
+    @OneToOne(() => center, admin => admin.adminCenter)
+    @JoinColumn()
+    center
+
     @CreateDateColumn()
     createdAt = undefined;
+
+
 
 }
