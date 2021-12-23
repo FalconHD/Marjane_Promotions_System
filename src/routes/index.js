@@ -6,5 +6,6 @@ export { Products } from './productsRoutes';
 export { promotion } from './promotionRoutes';
 export { center } from './centerRoutes';
 export { manager } from './managerRoutes';
+export { logs } from './logsRoutes';
 
 
