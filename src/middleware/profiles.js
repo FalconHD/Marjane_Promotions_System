@@ -12,9 +12,7 @@ export const isSuper = (req, res, next) => {
                 })
             }
         } else {
-            {
-                next(new Error('No token provided'))
-            }
+            next(new Error('No token provided'))
         }
     } catch (error) {
         next(error)
