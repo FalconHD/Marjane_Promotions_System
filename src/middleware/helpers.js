@@ -1,3 +1,5 @@
+import fs from "fs"
+
 export const calculateFidelity = (pourcentage, { name }) => {
     if (pourcentage < 50) {
         if (name != "Electronics") {
@@ -23,4 +25,19 @@ export const isMorning = (req, res, next) => {
     } else {
         next(new Error("The promotions are closed"))
     }
+}
+
+
+
+export const localLogs = (newLog) => {
+    fs.readFile('logs.json', 'utf8', function readFileCallback(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            logs = JSON.parse(data);
+            logs.table.push(newLog);
+            json = JSON.stringify(logs);
+            fs.writeFile('logs.json', json, 'utf8', callback);
+        }
+    });
 }
