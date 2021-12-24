@@ -1,4 +1,5 @@
 import fs from "fs"
+import { logs } from "../models"
 
 export const calculateFidelity = (pourcentage, { name }) => {
     if (pourcentage < 50) {
@@ -26,6 +27,7 @@ export const isMorning = (req, res, next) => {
         next(new Error("The promotions are closed"))
     }
 }
+
 
 
 

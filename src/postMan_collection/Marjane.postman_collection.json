@@ -1,0 +1,552 @@
+{
+	"info": {
+		"_postman_id": "2b445594-5f31-4273-bf4f-47856aeeb322",
+		"name": "Marjane",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "super Admin",
+			"item": [
+				{
+					"name": "AddSuperAdmin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNmI4ZDZmLWJhNGQtNGMzNC1hZGUxLTQ0NzRjYzhjYTg0YiIsImVtYWlsIjoiZWxtYUBnbWFpbC5jb20iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE2NDAxODU5ODIsImV4cCI6MTY0MDI3MjM4Mn0.P8Kg0ZXECmrqL3GOXGHzn_7mqIDEe3U3i7x7nvS6VyM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"youssbak.2015@gmail.com\",\r\n    \"password\":\"9m23sy50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/admin/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginSuperAdmin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMxNjQxYjhhLTQ5NzQtNDNkZC1iYWFlLTBmNDE2MTg0NWQzYyIsImVtYWlsIjoiZWxtYUBnbWFpbC5jb20iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE2NDAxODIwMTAsImV4cCI6MTY0MDI2ODQxMH0.hFJqiLPomZSdfFID1Ti1b3i0OF5q7ZEv0CDA3WgS3HQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" :\"elma@gmail.com\",\r\n    \"password\" :\"12345m\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/super/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"super",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_all_supers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/admin/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"admin",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_adminCenter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3YWQ1ZWYxLWMyZTAtNDA1NS1iY2MyLWJiMzAzODdjNDJiMCIsImVtYWlsIjoiZWxtYUBnbWFpbC5jb20iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE2NDAyNTMwODUsImV4cCI6MTY0MDMzOTQ4NX0.kGv6uvyYqFdnDko56Wt_6swAey91-73IpHKPwTmxKN8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"elmahdi.rammach@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/super/adCenter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"super",
+								"adCenter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin center",
+			"item": [
+				{
+					"name": "login_adminCenter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZiMmY1Mjc5LTVlZmItNGI0ZC04NzhmLWJmOTlhM2E3Y2ZkZSIsImVtYWlsIjoiYWRtaW5DZW50ZXJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluX2NlbnRlciIsImlhdCI6MTY0MDE4NzUzMiwiZXhwIjoxNjQwMjczOTMyfQ.Nas1gGFpd9SR7i6K3l9cyS7grvRfqcxgZpiVhsbwMvE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"elmahdi.rammach@gmail.com\" ,\r\n    \"password\" : \"9NV89l1e\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/admin/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create manager",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2ZTFjNWNhLTczYmMtNDRlMC04MjNmLTdjNWMzZWJiMjM4YyIsImVtYWlsIjoiZWxtYWhkaS5yYW1tYWNoQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbl9jZW50ZXIiLCJpYXQiOjE2NDAyNTMxNDksImV4cCI6MTY0MDMzOTU0OX0.A2ukti6rdElPEuhi9qxwMawCm0R5mXg00yWAwXEOOb4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" :\"manager1\",\r\n    \"email\": \"elmahdi.rammach@gmail.com\" ,\r\n    \"center\": \"c79929a6-bc90-477a-b4e8-b1cbabf9089d\",\r\n    \"category\":\"047cbd1b-f353-4b19-997c-b8449ca9011a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/admin/addManger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"admin",
+								"addManger"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "add_product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/product/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"product",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/product/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"product",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "promotion",
+			"item": [
+				{
+					"name": "add_promotion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZiMmY1Mjc5LTVlZmItNGI0ZC04NzhmLWJmOTlhM2E3Y2ZkZSIsImVtYWlsIjoiYWRtaW5DZW50ZXJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluX2NlbnRlciIsImlhdCI6MTY0MDE4NzUzMiwiZXhwIjoxNjQwMjczOTMyfQ.Nas1gGFpd9SR7i6K3l9cyS7grvRfqcxgZpiVhsbwMvE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n     \"pourcentage\" : \"10\",\r\n     \"product\" :\"0f022ee2-a197-4403-89d7-b038a71b6471\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/promotion/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"promotion",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get promotion",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRmOTdmZWMyLWRmZTAtNGYyZS1iOTVkLWI2ZTgyZmY2MTE3YiIsImVtYWlsIjoiZWxtYWhkaS5yYW1tYWNoQGdtYWlsLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNjQwMjY2Mjk0LCJleHAiOjE2NDAzNTI2OTR9.9IWSdoksQgLp4gnDXkoMg6j2937grnpkCRlpXg1x890",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/manager/promotion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"promotion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRmOTdmZWMyLWRmZTAtNGYyZS1iOTVkLWI2ZTgyZmY2MTE3YiIsImVtYWlsIjoiZWxtYWhkaS5yYW1tYWNoQGdtYWlsLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNjQwMjY2Mjk0LCJleHAiOjE2NDAzNTI2OTR9.9IWSdoksQgLp4gnDXkoMg6j2937grnpkCRlpXg1x890",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/promotion/4c3385b7-75f6-441c-bc3f-7ad5f3824adf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"promotion",
+								"4c3385b7-75f6-441c-bc3f-7ad5f3824adf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "add_category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/category/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"category",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Center",
+			"item": [
+				{
+					"name": "Add Center",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"marjane\" ,\r\n    \"city\" : \"safi\" ,\r\n    \"adminCenter\" : \"46e1c5ca-73bc-44e0-823f-7c5c3ebb238c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/center/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"center",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "Login manager",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTYwOTkzLWZiZTgtNGYyZC1iMzVjLTZhYTMzM2I5OTkzNCIsImVtYWlsIjoiZWxtYWhkaS5yYW1tYWNoQGdtYWlsLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNjQwMjA5NjI3LCJleHAiOjE2NDAyOTYwMjd9.9GeEMDLCCyLE2J_4WF8a9Af7CdG2i-TcWvtTn2FfBpQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" :\"elmahdi.rammach@gmail.com\" ,\r\n    \"password\":\"dVzpJZ2Y\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/manager/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "logs",
+			"item": [
+				{
+					"name": "all_requests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5NjlmZmFjLThlYzgtNDQzYS05OWYyLWJiY2QwYmJlZTRkOSIsImVtYWlsIjoieW91c3NiYWtAZ21haWwuY29tIiwicm9sZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNjQwMjU0NzY3LCJleHAiOjE2NDAzNDExNjd9.VvrbrdHmOpC_AqmlJ-d8-PTt3MAkQawIkihYhGS_Syk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/public/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"public",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

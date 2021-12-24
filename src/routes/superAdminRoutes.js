@@ -19,8 +19,7 @@ router.get('/all', async (req, res) => {
     res.json(admins)
 })
 
-//alloo
-console.log("test");
+
 
 router.get('/:id', async (req, res) => {
     const connection = getConnection()
@@ -59,7 +58,7 @@ router.post('/adCenter', isSuper, async (req, res) => {
     const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_SUPER_SECRET)
     console.log(tokensData);
     let logMsg = new logs();
-    logMsg.message = ` ${tokensData.id} create an admin Center: ${admin.id} `;
+    logMsg.message = `Super Admin : ${tokensData.id} created an admin Center: ${admin.id} `;
     logMsg.target = tokensData.id;
     logMsg.status = 'created';
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
