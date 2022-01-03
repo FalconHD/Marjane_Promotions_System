@@ -2,6 +2,8 @@ import fs from "fs"
 import { logs } from "../models"
 
 export const calculateFidelity = (pourcentage, { name }) => {
+    console.log(name);
+    console.log(pourcentage);
     if (pourcentage < 50) {
         if (name != "Electronics") {
             return (+pourcentage / 5) * 50

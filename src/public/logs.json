@@ -96,5 +96,19 @@
       "message": " 8b887894-6d3b-41d3-8a17-39c4a3563fb6 create an admin Center: e08a2800-e3a1-4657-a28b-6337fca38b8d ",
       "status": "created",
       "createdAt": "2022-01-03T10:36:42.185Z"
+   },
+   {
+      "id": "ad5428f6-e3dc-406e-832b-cf4d61f0fdec",
+      "target": "663553df-a67c-4c30-aa5c-a4dcb711218b",
+      "message": "Super Admin : 663553df-a67c-4c30-aa5c-a4dcb711218b created an admin Center: 815cd638-5a64-4126-b0e4-737dca6c1c73 ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:42:55.352Z"
+   },
+   {
+      "id": "418660bd-59f0-4c70-93a3-363180b28034",
+      "target": "815cd638-5a64-4126-b0e4-737dca6c1c73",
+      "message": " Admin Center :815cd638-5a64-4126-b0e4-737dca6c1c73 created an Manger Center: 4b19eb40-4b64-4152-81da-4dae9c1b1f2d ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:46:10.288Z"
    }
 ]

@@ -26,7 +26,7 @@ router.post('/add', isAdCenter, async (req, res, next) => {
 
         let promo = new promotion();
         promo.pourcentage = pourcentage;
-        promo.carteFidélité = calculateFidelity(pourcentage, productCategory.category.name);
+        promo.carteFidélité = calculateFidelity(pourcentage, productCategory.category);
         promo.adminCenter = id;
         promo.status = "pending";
         promo.product = product;
