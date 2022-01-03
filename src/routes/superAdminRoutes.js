@@ -43,6 +43,7 @@ router.post('/add', async (req, res) => {
 })
 
 router.post('/adCenter', isSuper, async (req, res) => {
+    console.log("ana hna");
     const password = await generatePassword();
     const connection = getConnection()
     const { email } = req.body

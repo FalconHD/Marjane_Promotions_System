@@ -12,5 +12,40 @@
       "message": " Manager :4f97fec2-dfe0-4f2e-b95d-b6e82ff6117b update status  promotion: 4c3385b7-75f6-441c-bc3f-7ad5f3824adf ",
       "status": "created",
       "createdAt": "2021-12-23T15:02:44.316Z"
+   },
+   {
+      "id": "4e5e43b8-cfa1-432e-86be-499cc8db2992",
+      "target": "663553df-a67c-4c30-aa5c-a4dcb711218b",
+      "message": "Super Admin : 663553df-a67c-4c30-aa5c-a4dcb711218b created an admin Center: 501ab3f2-0021-465a-b232-38dc8d257690 ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:04:04.406Z"
+   },
+   {
+      "id": "b7143ea4-e231-4edd-89d6-55c6c6b991c5",
+      "target": "663553df-a67c-4c30-aa5c-a4dcb711218b",
+      "message": "Super Admin : 663553df-a67c-4c30-aa5c-a4dcb711218b created an admin Center: 20c79664-3142-45e0-931c-fcfe05cd3d63 ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:08:56.925Z"
+   },
+   {
+      "id": "774b1b95-52d6-4ab8-bf36-3b0998ddfab8",
+      "target": "663553df-a67c-4c30-aa5c-a4dcb711218b",
+      "message": "Super Admin : 663553df-a67c-4c30-aa5c-a4dcb711218b created an admin Center: ba0cb42e-d48f-44b1-bb9f-a8051eceae7c ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:26:34.483Z"
+   },
+   {
+      "id": "75e63db1-c7e2-4502-a99d-8bcfed715375",
+      "target": "663553df-a67c-4c30-aa5c-a4dcb711218b",
+      "message": "Super Admin : 663553df-a67c-4c30-aa5c-a4dcb711218b created an admin Center: 44c932ea-ea32-4fc9-bada-01f61c716d2d ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:32:19.940Z"
+   },
+   {
+      "id": "62dc354a-95a7-4e40-86c6-6f878ec0644d",
+      "target": "663553df-a67c-4c30-aa5c-a4dcb711218b",
+      "message": "Super Admin : 663553df-a67c-4c30-aa5c-a4dcb711218b created an admin Center: d13f190c-6f24-4bd8-8de3-837f171c41b2 ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:33:18.377Z"
    }
 ]

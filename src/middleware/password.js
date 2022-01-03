@@ -36,8 +36,8 @@ export const sendEmail = async (email, password) => {
 
     let transporter = nodemailer.createTransport({
         host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        port: 465,
+        secure: true, // true for 465, false for other ports
         service: "Gmail",
         auth: {
             user: process.env.EMAIL,
