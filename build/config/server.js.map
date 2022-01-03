@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/config/server.js"],"names":["app","router","express","Router"],"mappings":";;;;;;;;;AAAA;;AAEO,IAAMA,GAAG,GAAG,0BAAZ;;;AACA,IAAMC,MAAM,GAAGC,oBAAQC,MAAR,EAAf","sourcesContent":["import express from \"express\"\r\n\r\nexport const app = express()\r\nexport const router = express.Router();"],"file":"server.js"}
