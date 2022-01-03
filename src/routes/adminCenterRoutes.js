@@ -71,7 +71,7 @@ router.post('/addManger',isAdCenter, async (req, res, next) => {
     const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
     console.log(tokensData);
     let logMsg = new logs();
-    logMsg.message = ` Admin Center :${tokensData.id} create an manger Center: ${managerRayon.id} `;
+    logMsg.message = ` Admin Center :${tokensData.id} created an Manger Center: ${managerRayon.id} `;
     logMsg.target = tokensData.id;
     logMsg.status = 'created';
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {

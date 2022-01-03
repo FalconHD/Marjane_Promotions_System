@@ -92,7 +92,7 @@ router.put('/:id',isManager, async (req, res) => {
     const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET)
     console.log(tokensData);
     let logMsg = new logs();
-    logMsg.message = ` Manager :${tokensData.id} update status  promotion: ${id} `;
+    logMsg.message = ` Manager :${tokensData.id} changed the promotion status: ${id} `;
     logMsg.target = tokensData.id;
     logMsg.status = 'created';
     logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
