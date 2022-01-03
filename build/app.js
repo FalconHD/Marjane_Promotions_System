@@ -68,8 +68,5 @@ var init = function init() {
   });
 };
 
-
-init()
-
 exports.init = init;
 //# sourceMappingURL=app.js.map

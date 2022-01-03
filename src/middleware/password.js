@@ -33,7 +33,7 @@ export const generatePassword = async () => {
 
 export const sendEmail = async (email, password) => {
 
-
+    console.log("innnn");
     let transporter = nodemailer.createTransport({
         host: "smtp.ethereal.email",
         port: 587,
@@ -54,7 +54,7 @@ export const sendEmail = async (email, password) => {
         <b> password : ${password}</b>`,
     });
 
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    console.log("Preview URL: %s", info);
 
 
 }

@@ -21,21 +21,20 @@ const router = Router();
 
 
 
-router.post('/add',isSuper, async (req, res) => {
-    const { name, city ,adminCenter } = req.body;
+router.post('/add', isSuper, async (req, res) => {
+    const { name, city, adminCenter } = req.body;
     const connection = getConnection()
-    // centers.forEach(async cent => {
-        let newCenter = new center()
-        newCenter.name = name
-        newCenter.city = city
-        newCenter.adminCenter = adminCenter
-        newCenter = await connection
-            .getRepository("center")
-            .save(newCenter)
-            .catch(error => {
-                console.log(error);
-            })
-        console.log(newCenter);
+    let newCenter = new center()
+    newCenter.name = name
+    newCenter.city = city
+    newCenter.adminCenter = adminCenter
+    newCenter = await connection
+        .getRepository("center")
+        .save(newCenter)
+        .catch(error => {
+            console.log(error);
+        })
+    console.log(newCenter);
     // })
 
     res.json({
