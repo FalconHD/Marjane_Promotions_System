@@ -110,5 +110,19 @@
       "message": " Admin Center :815cd638-5a64-4126-b0e4-737dca6c1c73 created an Manger Center: 4b19eb40-4b64-4152-81da-4dae9c1b1f2d ",
       "status": "created",
       "createdAt": "2022-01-03T10:46:10.288Z"
+   },
+   {
+      "id": "58db8036-987c-433d-a700-075a9f142903",
+      "target": "1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d",
+      "message": "Super Admin : 1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d created an admin Center: 62a6bf34-6c0e-4283-966a-317e3b5afb87 ",
+      "status": "created",
+      "createdAt": "2022-01-03T13:23:53.231Z"
+   },
+   {
+      "id": "7aa025e2-835f-4e8d-bb46-1f7edfbb0edb",
+      "target": "1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d",
+      "message": "Super Admin : 1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d created an admin Center: 77973217-578e-48c1-831d-ccc58061d59a ",
+      "status": "created",
+      "createdAt": "2022-01-03T13:24:00.119Z"
    }
 ]
