@@ -98,6 +98,7 @@
       "createdAt": "2022-01-03T10:36:42.185Z"
    },
    {
+<<<<<<< HEAD
       "id": "8de1cfa1-e392-4b5d-b464-3929993b050b",
       "target": "8b887894-6d3b-41d3-8a17-39c4a3563fb6",
       "message": "Super Admin : 8b887894-6d3b-41d3-8a17-39c4a3563fb6 created an admin Center: 19a352fe-db06-49e1-af6c-de2e4ecdadd6 ",
@@ -397,5 +398,33 @@
       "message": " Manager :ff449038-2907-4eaf-9099-a2df47fa9971 changed the promotion status: 36fff9fc-f581-4a2e-8c89-1015aa377659 ",
       "status": "created",
       "createdAt": "2022-01-13T01:15:01.215Z"
+=======
+      "id": "ad5428f6-e3dc-406e-832b-cf4d61f0fdec",
+      "target": "663553df-a67c-4c30-aa5c-a4dcb711218b",
+      "message": "Super Admin : 663553df-a67c-4c30-aa5c-a4dcb711218b created an admin Center: 815cd638-5a64-4126-b0e4-737dca6c1c73 ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:42:55.352Z"
+   },
+   {
+      "id": "418660bd-59f0-4c70-93a3-363180b28034",
+      "target": "815cd638-5a64-4126-b0e4-737dca6c1c73",
+      "message": " Admin Center :815cd638-5a64-4126-b0e4-737dca6c1c73 created an Manger Center: 4b19eb40-4b64-4152-81da-4dae9c1b1f2d ",
+      "status": "created",
+      "createdAt": "2022-01-03T10:46:10.288Z"
+   },
+   {
+      "id": "58db8036-987c-433d-a700-075a9f142903",
+      "target": "1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d",
+      "message": "Super Admin : 1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d created an admin Center: 62a6bf34-6c0e-4283-966a-317e3b5afb87 ",
+      "status": "created",
+      "createdAt": "2022-01-03T13:23:53.231Z"
+   },
+   {
+      "id": "7aa025e2-835f-4e8d-bb46-1f7edfbb0edb",
+      "target": "1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d",
+      "message": "Super Admin : 1dd2f3e5-bfe3-43e7-9f9b-ab4851355f2d created an admin Center: 77973217-578e-48c1-831d-ccc58061d59a ",
+      "status": "created",
+      "createdAt": "2022-01-03T13:24:00.119Z"
+>>>>>>> 75627fe3f8578964e8213d2819bde591413d072f
    }
 ]
