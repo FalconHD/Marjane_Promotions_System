@@ -33,6 +33,10 @@ const router = Router();
 //     }
 // })
 
+
+
+
+
 //get all promotion by category
 router.get('/promotion', isManager, isMorning, async (req, res, next) => {
     try {
@@ -48,6 +52,9 @@ router.get('/promotion', isManager, isMorning, async (req, res, next) => {
         const start = `${(new Date()).toISOString().split('T')[0]} 00:00:00`
         const end = `${(new Date()).toISOString().split('T')[0]} 11:59:59`
 
+        console.log("category : ", manager.category.id);
+        console.log("admin : ", manager.center.adminCenter.id);
+
         const promotion = await connection
             .getRepository("promotion")
             .find({
@@ -55,7 +62,7 @@ router.get('/promotion', isManager, isMorning, async (req, res, next) => {
                 where: {
                     product: { category: manager.category.id },
                     adminCenter: { id: manager.center.adminCenter.id },
-                    createdAt: Between(start, end)
+                    // createdAt: Between(start, end)
                 }
             })
 
@@ -104,6 +111,31 @@ router.post('/login', async (req, res) => {
 })
 
 
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const connection = getConnection()
+        const { id } = req.params
+        const manager = await connection.getRepository("manager").findOne({
+            where: {
+                id
+            }
+        })
+        if (manager) {
+            await connection.getRepository("manager").delete(id)
+            res.json({
+                message: "Delete success"
+            })
+        } else {
+            res.json({
+                message: "Invalid id"
+            })
+        }
+    } catch (error) {
+        next(error)
+    }
+
+})
 
 
 

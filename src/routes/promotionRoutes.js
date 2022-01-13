@@ -13,7 +13,7 @@ router.post('/add', isAdCenter, async (req, res, next) => {
     try {
         const { id } = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET);
         const connection = getConnection()
-        const { pourcentage, product } = req.body
+        const { pourcentage, product, duration } = req.body
         const productCategory = await connection.getRepository("product").findOne({
             relations: ["category"],
             where: {
@@ -26,8 +26,9 @@ router.post('/add', isAdCenter, async (req, res, next) => {
 
         let promo = new promotion();
         promo.pourcentage = pourcentage;
-        promo.carteFidélité = calculateFidelity(pourcentage, productCategory.category.name);
+        promo.carteFidélité = calculateFidelity(pourcentage, productCategory.category);
         promo.adminCenter = id;
+        promo.duratuin = duration;
         promo.status = "pending";
         promo.product = product;
         promo = await connection.getRepository("promotion").save(promo)
@@ -65,7 +66,7 @@ router.post('/add', isAdCenter, async (req, res, next) => {
 //             .leftJoinAndSelect("product.category", "category")
 //             // 
 //             .getMany();
-      
+
 
 
 
@@ -77,18 +78,54 @@ router.post('/add', isAdCenter, async (req, res, next) => {
 // })
 
 
+router.get('/myPromotions', isAdCenter, async (req, res, next) => {
+    try {
+        const connection = getConnection()
+        const admin = await connection.getRepository('admin_center').findOne({
+            relations: ['center', 'center.adminCenter'],
+            where: {
+                email: req.User.email
+            }
+        })
+        console.log(admin.center);
+        const promotions = await connection.getRepository('promotion').find({
+            relations: ['product', "product.category", "adminCenter"],
+            where: {
+                adminCenter: { id: admin.center.adminCenter.id },
+            }
+        }).catch(err => {
+            next(err)
+        })
+        res.json(promotions)
 
-router.put('/:id',isManager, async (req, res) => {
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get('/all', isSuper, async (req, res, next) => {
+    try {
+        const connection = getConnection()
+        const promotions = await connection.getRepository('promotion').find({
+            relations: ['product', "product.category", "adminCenter"],
+        })
+        res.json(promotions)
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.put('/:id', isManager, async (req, res) => {
     const connection = getConnection()
     const id = req.params.id
     console.log(id);
-    let updatePromotion =  await connection
+    let updatePromotion = await connection
         .createQueryBuilder()
         .update("promotion")
         .set({ status: req.body.status })
         .where("id = :id", { id: id })
         .execute();
-          //create log
+    //create log
     const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_MANAGER_SECRET)
     console.log(tokensData);
     let logMsg = new logs();
@@ -102,6 +139,7 @@ router.put('/:id',isManager, async (req, res) => {
 
     res.json(updatePromotion)
 })
+
 
 
 

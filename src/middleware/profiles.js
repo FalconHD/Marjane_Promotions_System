@@ -23,8 +23,8 @@ export const isAdCenter = (req, res, next) => {
     try {
         if (req.headers.authorization) {
             const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
-            console.log(tokensData);
             if (tokensData && tokensData.role === 'admin_center') {
+                req.User = tokensData
                 next()
             } else {
                 res.status(403).json({

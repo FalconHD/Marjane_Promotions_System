@@ -19,6 +19,17 @@ const router = Router();
 // ]
 
 
+router.get('/all', async (req, res, next) => {
+    try {
+        const connection = getConnection()
+        const centers = await connection.getRepository(center).find({
+            relations: ["adminCenter"]
+        })
+        res.json(centers)
+    } catch (error) {
+        next(error)
+    }
+})
 
 
 router.post('/add', isSuper, async (req, res) => {
@@ -36,6 +47,13 @@ router.post('/add', isSuper, async (req, res) => {
         })
     console.log(newCenter);
     // })
+
+    connection
+        .createQueryBuilder()
+        .update("admin_center")
+        .set({ center: newCenter.id })
+        .where("id = :id", { id: adminCenter })
+        .execute();
 
     res.json({
         message: "Center added"

@@ -170,14 +170,10 @@ router.get('/add', async (req, res) => {
 router.get('/all', async (req, res) => {
     const connection = getConnection()
 
-    console.log(connection);
     const products = await connection
         .getRepository("product")
         .find({
             relations: ['category']
-        })
-        .catch(error => {
-            console.log(error);
         })
     res.json(products)
 })

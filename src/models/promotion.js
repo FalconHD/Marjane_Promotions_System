@@ -17,6 +17,9 @@ export class promotion {
     @Column("varchar")
     status
 
+    @Column("varchar")
+    duratuin
+
     @CreateDateColumn()
     createdAt = undefined;
 

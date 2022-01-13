@@ -2,7 +2,7 @@ import fs from "fs"
 import { logs } from "../models"
 
 export const calculateFidelity = (pourcentage, { name }) => {
-    if (pourcentage < 50) {
+    if (+pourcentage < 50) {
         if (name != "Electronics") {
             return (+pourcentage / 5) * 50
         } else {
@@ -21,7 +21,7 @@ export const calculateFidelity = (pourcentage, { name }) => {
 export const isMorning = (req, res, next) => {
     const currentTime = new Date()
     const currentHour = currentTime.getHours()
-    if (currentHour >= 8 && currentHour < 12) {
+    if (currentHour >= 1 && currentHour <= 23) {
         next()
     } else {
         next(new Error("The promotions are closed"))

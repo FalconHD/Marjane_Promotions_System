@@ -1,35 +1,26 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
-import { adminCenter, manager ,logs } from "../models";
-import { hashPassword, checkPassword, generateToken, isAdCenter, generatePassword, sendEmail, verifyToken, localLogs } from "../middleware";
+import { adminCenter, manager, logs } from "../models";
+import { hashPassword, checkPassword, generateToken, isAdCenter, generatePassword, sendEmail, verifyToken, localLogs, isSuper } from "../middleware";
 
 
 const router = Router();
 
 
-router.get('/all', isAdCenter, async (req, res) => {
+router.get('/all', isSuper, async (req, res) => {
     const connection = getConnection()
-
-    console.log(connection);
     const admins = await connection
         .getRepository("admin_center")
-        .find()
+        .find({
+            relations: ["center"]
+        })
         .catch(error => {
             console.log(error);
         })
     res.json(admins)
 })
 
-router.get('/:id', async (req, res) => {
-    const connection = getConnection()
-    const id = req.params.id
-    const users = await connection.getRepository("admin_center").findOne({
-        where: {
-            id
-        }
-    })
-    res.json(users)
-})
+
 
 router.post('/add', async (req, res, next) => {
     const connection = getConnection()
@@ -46,43 +37,51 @@ router.post('/add', async (req, res, next) => {
 
 })
 
-router.post('/addManger',isAdCenter, async (req, res, next) => {
-    const password = await generatePassword();
-    const connection = getConnection()
-    const { name , email  ,center ,category} = req.body
-    let managerRayon = new manager();
-    managerRayon.name = name
-    managerRayon.email = email;
-    managerRayon.password = await hashPassword(password);
-    managerRayon.center = center
-    managerRayon.category = category
+router.post('/addManger', isAdCenter, async (req, res, next) => {
+    try {
 
-    //Send Email 
-    sendEmail(email, password); 
+        const password = await generatePassword();
+        const connection = getConnection()
+        const admin = await connection.getRepository('admin_center').findOne({
+            relations: ["center"],
+            where: {
+                email: req.User.email
+            }
+        })
+        console.log(admin);
+        const { name, email, category } = req.body
+        let managerRayon = new manager();
+        managerRayon.name = name
+        managerRayon.email = email;
+        managerRayon.password = await hashPassword(password);
+        managerRayon.center = admin.center.id
+        managerRayon.category = category
 
-    managerRayon = await connection.getRepository("manager").save(managerRayon).catch(error => {
-        console.log(error.message);
+        //Send Email 
+        sendEmail(email, password);
 
-    
-    })
-    console.log(managerRayon);
+        managerRayon = await connection.getRepository("manager").save(managerRayon)
+        console.log(managerRayon);
 
-    //create log
-    const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
-    console.log(tokensData);
-    let logMsg = new logs();
-    logMsg.message = ` Admin Center :${tokensData.id} created an Manger Center: ${managerRayon.id} `;
-    logMsg.target = tokensData.id;
-    logMsg.status = 'created';
-    logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
-        console.log(error);
-    })
-    localLogs(logMsg);
-    res.json({
-        message: "manager center added"
-    })
-   
+        //create log
+        const tokensData = verifyToken(req.headers.authorization.split(" ")[1], process.env.JWT_CENTER_SECRET)
+        console.log(tokensData);
+        let logMsg = new logs();
+        logMsg.message = ` Admin Center :${tokensData.id} created an Manger Center: ${managerRayon.id} `;
+        logMsg.target = tokensData.id;
+        logMsg.status = 'created';
+        logMsg = await connection.getRepository("logs").save(logMsg).catch(error => {
+            console.log(error);
+        })
+        localLogs(logMsg);
+        res.json({
+            message: "manager center added"
+        })
 
+
+    } catch (error) {
+        next(error)
+    }
 })
 
 
@@ -116,6 +115,39 @@ router.post('/login', async (req, res) => {
 })
 
 
+router.get('/managers', isAdCenter, async (req, res, next) => {
+    console.log("here");
+    try {
+        const connection = getConnection()
+        const adminCenter = await connection.getRepository('admin_center').findOne({
+            relations: ["center"],
+            where: {
+                email: req.User.email
+            }
+        })
+        const managers = await connection.getRepository(manager).find({
+            relations: ["category", "center"],
+            where: {
+                center: adminCenter.center.id
+            }
+        })
+        console.log(managers);
+        res.json(managers)
+    } catch (error) {
+        next(error)
+    }
+})
 
+
+router.get('/:id', async (req, res) => {
+    const connection = getConnection()
+    const id = req.params.id
+    const users = await connection.getRepository("admin_center").findOne({
+        where: {
+            id
+        }
+    })
+    res.json(users)
+})
 
 export { router as adminCenter }

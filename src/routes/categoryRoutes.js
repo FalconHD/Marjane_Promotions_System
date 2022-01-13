@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Router } from "express"
 import { superAdmin, category } from "../models";
-import { hashPassword, checkPassword, generateToken, isSuper } from "../middleware";
+import { hashPassword, checkPassword, generateToken, isSuper, isAdCenter } from "../middleware";
 
 
 const router = Router();
@@ -56,6 +56,16 @@ router.get('/add', async (req, res) => {
     })
 })
 
+
+router.get('/categories', isAdCenter, async (req, res, next) => {
+    try {
+        const connection = getConnection()
+        const categories = await connection.getRepository('category').find()
+        res.json(categories)
+    } catch (error) {
+
+    }
+})
 
 
 export { router as Category }

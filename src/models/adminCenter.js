@@ -12,6 +12,9 @@ export class adminCenter {
     email
 
     @Column("varchar")
+    name
+
+    @Column("varchar")
     password
 
     @OneToOne(() => center, admin => admin.adminCenter)

@@ -6,7 +6,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { app, connection } from './config';
 import { errorHandler, notFound } from './middleware';
-import { superAdmin, logs, Category, adminCenter, Products, promotion, center, manager } from './routes';
+import { superAdmin, logs, Category, adminCenter, Products, promotion, center, manager, userRoutes } from './routes';
 
 
 export const init = () => {
@@ -27,6 +27,7 @@ export const init = () => {
     app.use("/promotion", promotion);
     app.use("/center", center);
     app.use("/log", logs);
+    app.use("/auth", userRoutes);
 
     // 404
     app.use(notFound)
